@@ -50,8 +50,6 @@ python Main.py
 - Select the language (JavaScript or Java).
 - Review the deobfuscated output in the console or generated file.
 
-For detailed usage options, run `python Main.py --help`.
-
 ## Get AI API Keys
 
 To use the tool, you'll need an API key from one of these providers:
