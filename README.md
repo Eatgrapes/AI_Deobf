@@ -18,7 +18,7 @@ This project is in early development—contributions and feedback are highly enc
 
 ## Requirements
 - Python 3.8 or higher ([Download here](https://www.python.org/downloads/)).
-- Access to an AI API key (see [Get AI API](#get-ai-api) below).
+- Access to an AI API key (see [Get AI API](#Get-AI-API-Keys) below).
 
 ## Quick Start
 
@@ -40,7 +40,7 @@ Run the initialization script to set up your API key:
 ```bash
 python init.py
 ```
-Follow the prompts to enter your API details (e.g., endpoint, key, model).
+Follow the prompts to enter your API details (e.g. API Keys).
 
 ### 4. Run the Deobfuscator
 ```bash
