@@ -75,7 +75,6 @@ We'd love your help to expand language support, fix bugs, or enhance the UI. Her
 2. Commit your changes (`git commit -m 'Add amazing feature'`).
 3. Push to the branch (`git push origin feature/amazing-feature`).
 4. Open a [Pull Request](https://github.com/Eatgrapes/AI_Deobf/compare) and describe your changes.
-5. 
 
 Thanks for contributing! 🚀
 
