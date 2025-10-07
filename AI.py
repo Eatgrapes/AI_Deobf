@@ -13,20 +13,15 @@ def _query_deepseek(api_key, messages):
     return response.choices[0].message.content
 
 def _clean_ai_response(response_content):
-    # 首先去除开头和结尾的多余引号
     response_content = response_content.strip()
     if response_content.startswith('"') and response_content.endswith('"'):
         response_content = response_content[1:-1]
-    
-    # 然后处理可能的markdown代码块
     if response_content.startswith("```") and response_content.endswith("```"):
-        # 找到第一个换行符后的位置
+        
         first_newline = response_content.find('\n')
         if first_newline != -1:
-            # 移除第一行(如```java)和结尾的```
             response_content = response_content[first_newline + 1:-3]
         else:
-            # 如果没有换行符，直接移除所有```
             response_content = response_content[3:-3]
     elif response_content.startswith("```"):
         first_newline = response_content.find('\n')
@@ -37,35 +32,28 @@ def _clean_ai_response(response_content):
     elif response_content.endswith("```"):
         response_content = response_content[:-3]
     
-    # 移除对双引号的不必要转义
     response_content = response_content.replace('\\"', '"')
     return response_content.strip()
 
 def _query_gemini(api_key, messages):
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-2.5-pro')
-
-    # Gemini API需要特定的结构：用户/模型消息历史记录和最终用户消息
     
     system_prompt = ""
     history = []
-    
-    # 分离系统提示和对话历史
+
     for msg in messages:
         if msg['role'] == 'system':
             system_prompt += msg['content'] + "\n"
         elif msg['role'] in ['user', 'assistant']:
-            # Gemini使用'model'表示助手角色
             role = 'model' if msg['role'] == 'assistant' else 'user'
             history.append({'role': role, 'parts': [msg['content']]})
-
-    # 最后一条消息应该是用户的提示
+            
     if not history or history[-1]['role'] != 'user':
         return "Error: Last message in history is not from the user."
 
     final_prompt = history.pop()
 
-    # 将系统提示添加到最终用户提示的第一部分
     final_prompt['parts'][0] = system_prompt + final_prompt['parts'][0]
 
     chat = model.start_chat(history=history)
