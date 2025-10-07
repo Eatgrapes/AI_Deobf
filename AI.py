@@ -37,7 +37,7 @@ def _clean_ai_response(response_content):
 
 def _query_gemini(api_key, messages):
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-2.5-pro')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     
     system_prompt = ""
     history = []
